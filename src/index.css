@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --primary: #F4D6CC;
+    --secondary: #F4B860;
+    --accent: #C83E4D;
+    --accent-hover: #ca273a;
+    --text: #1d1212;
+    --shadow: #4A5859;
+}
+
+/* This will apply the gray-900 color to all texts */
+* {
+    @apply text-text;
+  }
+  
