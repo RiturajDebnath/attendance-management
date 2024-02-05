@@ -2,21 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
 :root {
-    --primary: #F4D6CC;
+    --primary: rgb(30, 146, 19);
+    --primary-hover: rgb(42, 189, 28);
+    --light-primary: rgba(106, 228, 95, 0.445);
     --secondary: #F4B860;
     --light-secondary: #ddc39b;
     --accent: #C83E4D;
     --accent-hover: #ca273a;
-    --text: #1d1212;
+    --text: #1b1b1b;
     --shadow: #4A5859;
 }
 
 /* This will apply the gray-900 color to all texts */
 * {
     @apply text-text;
+    font-family: 'Outfit', sans-serif;
+    /* font-family: 'Playfair Display', serif; */
+}
+
+#logo, #greet {
+    font-family: 'Playfair Display', serif;
+}
+
+input, select {
+    @apply w-full rounded-lg bg-light-primary px-2;
+}
+
+button {
+    @apply hover:bg-primary-hover bg-primary w-full py-1 rounded-lg text-white font-bold;
 }
 
 #landing {
     background-image: url("/public/assets/notebook.jpg");
+}
+
+#auth {
+    background-image: url("/public/assets/attendance-ai.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
