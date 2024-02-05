@@ -8,15 +8,18 @@ const Signup = () => {
   const [creds, setCreds] = useState({
     username: null,
     email: null,
-    password: null,
+    university: null,
+    stream: null,
     year: 2000,
+    password: null,
+    confirmPassword: null,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!creds.email || !creds.password) {
-      console.log("Enter both fields !!");
+    if (!creds.password || !creds.confirmPassword) {
+      console.log("Passwords do not match !");
       return;
     }
 
@@ -24,33 +27,10 @@ const Signup = () => {
     console.log(creds);
   };
 
-  const StudentForm = () => {
-    return (
-      <div className="flex flex-col gap-2 justify-center mt-2 w-72 my-2">
-        <label htmlFor="year">Enter Admission Year</label>
-        <input
-          required={true}
-          onChange={(e) => {
-            setCreds({
-              ...creds,
-              year: e.target.value,
-            });
-          }}
-          className="w-full rounded-xl px-4"
-          id="year"
-          name="year"
-          type="number"
-          min={2000}
-          max={2024}
-          placeholder="2020"
-        ></input>
-      </div>
-    );
-  };
-
   return (
-    <main className="min-h-screen bg-light-secondary py-24 flex justify-center">
-      <section className="w-full bg-primary rounded-xl shadow-lg shadow-shadow min-h-[75vh] max-w-[55vw]">
+    <main id="auth" className="min-h-screen">
+      <div className="min-h-screen w-full backdrop-blur-lg py-16 flex justify-center">
+      <section className="w-full bg-white rounded-xl shadow-lg shadow-black/60 min-h-[75vh] max-w-[45vw]">
         <form className="px-24" onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-start">
             <div className="my-6">
@@ -68,8 +48,12 @@ const Signup = () => {
                     onChange={handleCheckboxChange}
                     className="sr-only peer"
                   ></input>
-                  <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-accent"></div>
-                  <span className="ms-3 text-sm font-medium text-accent">
+                  <div className="w-9 h-5 peer-focus:outline-none rounded-full peer bg-primary peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-primary-hover"></div>
+                  <span
+                    className={`ms-3 text-sm font-medium ${
+                      isStudent ? "text-primary" : "text-primary-hover"
+                    }`}
+                  >
                     Create as {isStudent ? "Student" : "Teacher"}
                   </span>
                 </label>
@@ -137,18 +121,44 @@ const Signup = () => {
                 id="stream"
                 className="w-full rounded-xl px-4"
                 required={true}
+                onChange={(e) => {
+                  setCreds({
+                    ...creds,
+                    stream: e.target.value,
+                  });
+                }}
               >
-                <option value={""}>
-                  Choose a Stream
+                <option value={""}>Choose a Stream</option>
+                <option value="Internet of Things">Internet of Things</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Blockchain Technology">
+                  Blockchain Technology
                 </option>
-                <option value="US">Internet of Things</option>
-                <option value="CA">Computer Science</option>
-                <option value="FR">Blockchain Technology</option>
-                <option value="DE">Cyber Security</option>
+                <option value="Cyber Security">Cyber Security</option>
               </select>
             </div>
 
-            {isStudent ? <StudentForm /> : null}
+            {isStudent ? (
+              <div className="flex flex-col gap-2 justify-center mt-2 w-72 my-2">
+                <label htmlFor="year">Enter Admission Year</label>
+                <input
+                  required={true}
+                  onChange={(e) => {
+                    setCreds({
+                      ...creds,
+                      year: e.target.value,
+                    });
+                  }}
+                  className="w-full rounded-xl px-4"
+                  id="year"
+                  name="year"
+                  type="number"
+                  min={2000}
+                  max={2024}
+                  placeholder="2020"
+                ></input>
+              </div>
+            ) : null}
 
             <div className="flex flex-col gap-2 justify-center my-2 w-72">
               <label htmlFor="password">Enter Your Password</label>
@@ -176,7 +186,7 @@ const Signup = () => {
                 onChange={(e) => {
                   setCreds({
                     ...creds,
-                    password: e.target.value,
+                    confirmPassword: e.target.value,
                   });
                 }}
                 className="w-full rounded-xl px-4"
@@ -189,14 +199,18 @@ const Signup = () => {
             <div className="w-72 mt-8 mb-12">
               <button
                 type="submit"
-                className="bg-accent hover:bg-accent-hover w-full py-1 rounded-xl text-primary font-bold"
+                className="bg-primary"
               >
                 Create Account
               </button>
+              <p className="my-6 text-sm text-center">
+                Already Have an Account ? <a href="/login" className="text-primary font-bold"> Login Instead</a>
+              </p>
             </div>
           </div>
         </form>
       </section>
+      </div>
     </main>
   );
 };
