@@ -18,6 +18,7 @@
     --shadow: #4A5859;
 }
 
+
 /* This will apply the gray-900 color to all texts */
 * {
     @apply text-text;
@@ -34,7 +35,7 @@ input, select {
 }
 
 button {
-    @apply hover:bg-primary-hover bg-primary w-full py-1 rounded-lg text-white font-bold;
+    @apply hover:bg-primary-hover w-full py-1 rounded-lg text-white font-bold;
 }
 
 #landing {

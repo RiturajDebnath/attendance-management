@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Login from './pages/Login';
-import Layout from './pages/Layout';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
 import Classes from './pages/Classes';
-import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Layout from './pages/Layout';
+import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Signup from './pages/Signup';
+import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
     </BrowserRouter>
   );
 }
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
