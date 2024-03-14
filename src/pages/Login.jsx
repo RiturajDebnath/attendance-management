@@ -1,4 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { BACKEND_URL } from "../components/constants/api-endpoints";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [creds, setCreds] = useState({
@@ -6,7 +9,9 @@ const Login = () => {
     password: null,
   });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!creds.email || !creds.password) {
@@ -14,8 +19,16 @@ const Login = () => {
       return;
     }
 
-    // Server Action
-    console.log(creds);
+    try {
+      const data = await axios.post(BACKEND_URL + "/auth/login", creds, {
+        withCredentials: true,
+      });
+      // navigate("/dashboard");
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   };
 
   return (
@@ -62,10 +75,7 @@ const Login = () => {
               </div>
 
               <div className="w-72 my-8">
-                <button
-                  type="submit"
-                  className="bg-primary"
-                >
+                <button type="submit" className="bg-primary">
                   Log In
                 </button>
                 <p className="mt-6 text-sm text-center">
